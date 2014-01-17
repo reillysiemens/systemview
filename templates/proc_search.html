@@ -11,7 +11,7 @@
 
     <ul class=procs>
     {% if count %}
-        <h3>{{ count }} processes found on {{ hostname }}</h3>
+        <h3>{{ count }} processes found on {{ hostname }} for term"{{ term }}"<h3>
     {% endif %}
 
     {% for proc in procs %}

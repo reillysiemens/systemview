@@ -62,7 +62,7 @@ def show_procs():
 
     # render the search template, this time with our data
     return render_template('proc_search.html',
-                           procs=procs, count=count, hostname=hostname)
+                           procs=procs, count=count, hostname=hostname, term=term)
 
 
 # this method doesn't have a decorator, it's just a utility method
