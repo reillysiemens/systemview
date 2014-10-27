@@ -5,6 +5,8 @@ from flask.ext.sqlalchemy import SQLAlchemy
 import subprocess
 import sys
 import argparse
+from sqlite3 import dbapi2 as sqlite
+import os
 
 # this is a single line comment
 
@@ -20,12 +22,11 @@ It is good for long descriptions of stuff.
 app = Flask(__name__)
 
 # tell the app where our db is.
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://vagrant:password@localhost/systemview'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////' + os.path.dirname(os.path.abspath(__file__)) + 'systemview.db'
 
 # set up the db through SQLAlchemy
 db = SQLAlchemy(app)
 db.init_app(app)
-
 
 # declare our Search model to hold previous search terms.
 class Search(db.Model):
@@ -41,6 +42,7 @@ class Search(db.Model):
     def __init__(self, term):
         self.term = term
 
+db.create_all()
 
 """
 @app.route is a decorator - it tells the app what URL to respond to
